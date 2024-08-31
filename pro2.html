@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Slider</title>
+    <style>
+        /* CSS Styles */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        .slider-container {
+            position: relative;
+            max-width: 100%;
+            margin: auto;
+            overflow: hidden;
+            border: 2px solid #ddd; /* Optional border */
+        }
+
+        .slider {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .slide {
+            min-width: 100%;
+            box-sizing: border-box;
+        }
+
+        .slide img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .prev, .next {
+            position: absolute;
+            top: 50%;
+            width: auto;
+            padding: 16px;
+            margin-top: -22px;
+            color: white;
+            font-weight: bold;
+            font-size: 24px;
+            background-color: rgba(0,0,0,0.5);
+            border: none;
+            cursor: pointer;
+            border-radius: 3px;
+            user-select: none;
+        }
+
+        .prev {
+            left: 0;
+        }
+
+        .next {
+            right: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="slider-container">
+        <div class="slider">
+            <div class="slide">
+                <img src="https://www.hdwallpapers.in/download/kratos_in_god_of_war_4k-HD.jpg" alt="Image 1">
+            </div>
+            <div class="slide">
+                <img src="https://wallpapercave.com/wp/wp2625111.jpg" alt="Image 2">
+            </div>
+            <div class="slide">
+                <img src="https://images.hdqwalls.com/wallpapers/4k-god-of-war-4-51.jpg" alt="Image 3">
+            </div>
+            <!-- Add more slides as needed -->
+        </div>
+        <button class="prev" onclick="moveSlide(-1)">&#10094;</button>
+        <button class="next" onclick="moveSlide(1)">&#10095;</button>
+    </div>
+
+    <script>
+        // JavaScript for slider functionality
+        let slideIndex = 0;
+
+        function showSlide(index) {
+            const slides = document.querySelectorAll('.slide');
+            if (index >= slides.length) {
+                slideIndex = 0;
+            } else if (index < 0) {
+                slideIndex = slides.length - 1;
+            } else {
+                slideIndex = index;
+            }
+            const slider = document.querySelector('.slider');
+            slider.style.transform = `translateX(-${slideIndex * 100}%)`;
+        }
+
+        function moveSlide(step) {
+            showSlide(slideIndex + step);
+        }
+
+        // Initialize the slider
+        showSlide(slideIndex);
+
+        // Optional: Auto-slide every 5 seconds
+        setInterval(() => moveSlide(1), 5000);
+    </script>
+</body>
+</html>
